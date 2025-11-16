@@ -13,12 +13,10 @@ const getEmployees = (listElement) => {
 };
 
 const sortList = (list) => {
-  const listElement = document.getElementsByTagName('ul')[0];
+  const listElement = document.getElementsByTagName(list)[0];
   const employees = getEmployees(listElement.children);
   const sortedEmployees = employees.sort(
-    (a, b) =>
-      Number(b.salary.slice(1).replace(',', '')) -
-      Number(a.salary.slice(1).replace(',', '')),
+    (a, b) => getSalary(b.salary) - getSalary(a.salary),
   );
 
   listElement.innerHTML = sortedEmployees
@@ -28,5 +26,7 @@ const sortList = (list) => {
     )
     .join('');
 };
+
+const getSalary = (salary) => Number(salary.slice(1).replace(',', ''));
 
 sortList('ul');
